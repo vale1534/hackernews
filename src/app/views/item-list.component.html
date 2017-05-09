@@ -1,0 +1,30 @@
+<div class="items-view">
+  <div class="items-nav">
+    <a [class.disabled]="!hasPrevPages()" (click)="prevPage()">&lt; prev</a>
+    <span>{{currentPage+1}}/{{totalPages}}</span>
+    <a [class.disabled]="!hasMorePages()" (click)="nextPage()">more &gt;</a>
+  </div>
+  <div class="items-list">
+    <app-item *ngFor="let item of items; trackBy: trackItem" [item]="item"></app-item>
+    <!--<div *ngFor="let it of items; trackBy: trackItem" class="items-list-item">
+      <span class="score">{{it.score}}</span>
+      <span class="title">
+        <a *ngIf="it.url" [href]="it.url" target="_blank">{{ it.title }}</a>
+        <span *ngIf="it.url" class="host">({{ hostName(it.url) }})</span>
+        <a *ngIf="!it.url" href=""> {{ it.title }} </a>
+      </span>
+      <br>
+      <span class="meta">
+        <span *ngIf="it.type !== 'job'" class="by">
+          by <a>{{ it.by }}</a>
+        </span>
+        <span class="time">
+          {{ timeAgo(it.time) }} ago
+        </span>
+        <span *ngIf="it.type !== 'job'" class="link">
+          | <a>{{ it.descendants }} comments</a>
+        </span>
+      </span>
+    </div>-->
+  </div>
+</div>

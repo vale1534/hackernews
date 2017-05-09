@@ -1,0 +1,14 @@
+<div *ngIf="item" class="item">
+  <span class="score">{{item.score}}</span>
+  <span class="title">
+    <a *ngIf="!item.url" (click)="viewItem()"> {{ item.title }} </a>
+    <a *ngIf="item.url" [href]="item.url" target="_blank">{{ item.title }}</a>
+    <span *ngIf="item.url" class="host">({{ item.url | hostName }})</span>
+  </span>
+  <br>
+  <span class="meta">
+    <span *ngIf="!isJobItem()" class="by">by <a>{{ item.by }}</a></span>
+    <span class="time">{{ item.time | timeAgo }} ago</span>
+    <span *ngIf="!isJobItem()" class="link"> | <a (click)="viewItem()">{{ item.descendants }} comments</a></span>
+  </span>
+</div>
