@@ -8,7 +8,8 @@ HackerNews clone built with Angular 4.0, rewrite [vue-hackernews-2.0](https://gi
 
 <p align="center">
   <a href="https://github.com/fe-artisan/ng4-hn" target="_blank">
-    <img src="https://github.com/fe-artisan/ng4-hn/blob/master/imgs/snapshot1.png" width="700px">
+    <img src="https://github.com/fe-artisan/ng4-hn/blob/master/imgs/snapshot1.png" width="978px">
+    <img src="https://github.com/fe-artisan/ng4-hn/blob/master/imgs/snapshot2.png" width="978px">
   </a>
 </p>
 
