@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { DataService } from '../store/data.service';
 
 @Component({
   selector: 'app-story',
@@ -6,10 +9,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./story.component.scss']
 })
 export class StoryComponent implements OnInit {
+  id: string;
+  story: any;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.route.params.subscribe(
+      params => this.routeParamsChanged(params),
+      error => this.handleError(error)
+    );
   }
 
+  routeParamsChanged(params: { [key: string]: string }): void {
+    this.id = params.id;
+    this.dataService.getStory(Number(this.id))
+      .then(story => this.story = story);
+  }
+
+  handleError(error: any): void {
+    throw new Error(`Unhandle error ${error.message}`);
+  }
+
+  viewUser(): void {
+    console.log('view user info:', this.story.by);
+    this.router.navigate(['user', this.story.by]);
+  }
 }

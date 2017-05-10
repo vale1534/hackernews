@@ -28,24 +28,19 @@ export class ApiService {
   }
 
   fetch(child: string): Promise<any> {
-    //log(`fetching ${child}`);
-    const cache = false;//localStorage.getItem(child);
-    if (cache) {
-      //log(`cache hit for ${child}`);
-      return Promise.resolve(JSON.parse(cache));
-    } else {
-      return new Promise((resolve, reject) => {
-        this.ref.child(child).once('value', snapshot => {
-          const val = snapshot.val();
-          localStorage.setItem(child, JSON.stringify(val));
-          resolve(val);
-        }, reject);
-      });
-    }
+    return new Promise((resolve, reject) => {
+      this.ref.child(child).once('value', snapshot => {
+        resolve(snapshot.val());
+      }, reject);
+    });
   }
 
   fetchItem(id: number): Promise<any> {
     return this.fetch('item/' + id);
+  }
+
+  fetchUser(id: string): Promise<any> {
+    return this.fetch('user/' + id);
   }
 
   fetchItems(ids: number[]): Promise<any[]> {

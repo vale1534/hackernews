@@ -25,8 +25,11 @@ export class DataService {
   constructor(private api: ApiService) {
     for (let i = 0; i < 5; ++i) {
       api.getRef(this.topicsList[i]).on('value', snapshot => {
-        this.cacheList[i] = snapshot.val();
-        this.storiesList[i].next(this.cacheList[i]);
+        const items = snapshot.val();
+        if (items && items.length > 0) {
+          this.cacheList[i] = items;
+          this.storiesList[i].next(this.cacheList[i]);
+        }
       });
     }
   }
@@ -39,7 +42,11 @@ export class DataService {
   updateStories(id: number) {
     // TODO: handle out of range error?
     const stories = this.storiesList[id];
-    stories.next(this.cacheList[id]);
+    const cache = this.cacheList[id];
+    // Don't push empty items
+    if (cache && cache.length > 0) {
+      stories.next(cache);
+    }
   }
 
   getStories(stories: number[]) {
@@ -49,11 +56,23 @@ export class DataService {
       const hit = lscache.get(key);
       if (hit) return Promise.resolve(hit);
       return this.api.fetchItem(story)
-        .then(x => {
-          lscache.set(key, x, 5);
-          return x;
+        .then(item => {
+          lscache.set(key, item, 15);
+          return item;
         });
     }));
+  }
+
+  getStory(id: number) {
+    return this.api.fetchItem(id)
+      .then(item => {
+        lscache.set(String(id), item, 15);
+        return item;
+      });
+  }
+
+  getUser(id: string) {
+    return this.api.fetchUser(id);
   }
 
   getData(topic: string) {

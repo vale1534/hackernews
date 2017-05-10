@@ -1,3 +1,11 @@
+:host {
+  position: relative;
+  padding-top: 45px;
+  max-width: 800px;
+  margin: 0px auto;
+  display: block;
+}
+
 .items-view {
   position: relative;
   padding-top: 45px;
@@ -27,42 +35,12 @@
 }
 
 .items-list {
-  background-color: #fff;
+  //background-color: #fff;
   border-radius: 2px;
   position: absolute;
   margin: 30px 0;
   width: 100%;
   @media (max-width: 600px) {
     margin: 10px 0;
-  }
-}
-
-.items-list-item {
-  background-color: #fff;
-  padding: 20px 30px 20px 80px;
-  border-bottom: 1px solid #eee;
-  position: relative;
-  line-height: 20px;
-  .score {
-    color: #ff6600;
-    font-size: 1.1em;
-    font-weight: 700;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 80px;
-    text-align: center;
-    margin-top: -10px;
-  }
-  .meta, .host {
-    font-size: 0.85em;
-    color: #828282;
-    a {
-      color: #828282;
-      text-decoration: underline;
-      &:hover {
-        color: #ff6600;
-      }
-    }
   }
 }

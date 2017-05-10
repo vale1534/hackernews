@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-item',
@@ -19,8 +20,13 @@ export class ItemComponent implements OnInit {
     return this.item.type === 'job';
   }
 
-  viewItem(): void {
-    console.log('view', this.item);
+  viewStory(): void {
+    console.log('view story:', this.item.id);
     this.router.navigate(['story', this.item.id]);
+  }
+
+  viewUser(): void {
+    console.log('view user info:', this.item.by);
+    this.router.navigate(['user', this.item.by]);
   }
 }

@@ -1,0 +1,11 @@
+<div *ngIf="user" class="banner">
+  <h3>{{user.id}}</h3>
+  <ul>
+    <li><span class="label">Created:</span> {{ user.created | timeAgo }} </li>
+    <li><span class="label">Karma:</span> {{ user.karma }} </li>
+  </ul>
+  <p>{{ user.about }}</p>
+  <p class="meta">
+    <a [href]="submittedUrl" target="_blank">{{ submissions }} submissions</a>
+  </p>
+</div>

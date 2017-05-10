@@ -1,3 +1,14 @@
-<p>
-  story works!
-</p>
+<div *ngIf="story" class="banner">
+  <h3>{{story.title}}</h3>
+  
+  <div class="meta">
+    <a *ngIf="story.url" [href]="story.url">{{ story.url }}</a>
+    <br><br>
+    <span class="by">by <a (click)="viewUser()">{{ story.by }}</a></span>
+    <span class="time">{{ story.time | timeAgo }} ago</span>
+  </div>
+</div>
+
+<div *ngIf="story" class="comments">
+  <p>{{ story.descendants }} comments</p>
+</div>
