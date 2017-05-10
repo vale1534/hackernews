@@ -3,10 +3,12 @@
 <head>
   <base href="/ng4-hn/">
   <title>Ng4 Hacker News</title>
+
   <meta charset="utf-8">
   <meta name="theme-color" content="#f60">
   <meta name="mobile-web-app-capable" content="yew">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+
   <link rel="manifest" href="/ng4-hn/assets/manifest.json">
   <link rel="shortcut icon" size="48x48" href="/ng4-hn/assets/ic-48.png">
   <link rel="shortcut icon" size="72x72" href="/ng4-hn/assets/ic-72.png">
@@ -15,6 +17,18 @@
   <link rel="shortcut icon" size="192x192" href="/ng4-hn/assets/ic-192.png">
   <link rel="shortcut icon" size="512x512" href="/ng4-hn/assets/ic-512.png">
   <link rel="icon" type="image/x-icon" href="/ng4-hn/favicon.ico">
+
+  <!--http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/-->
+  <script>
+    (function(){
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+
 </head>
 <body>
   <app-root>Loading...</app-root>
