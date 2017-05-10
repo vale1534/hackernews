@@ -28,7 +28,11 @@ export class StoryComponent implements OnInit {
   routeParamsChanged(params: { [key: string]: string }): void {
     this.id = params.id;
     this.dataService.getStory(Number(this.id))
-      .then(story => this.story = story);
+      .then(story => {
+        if (!story) return;
+        story.kids = story.kids || [];
+        this.story = story;
+      });
   }
 
   handleError(error: any): void {

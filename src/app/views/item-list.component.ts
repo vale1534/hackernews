@@ -1,11 +1,18 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { trigger, state, style, transition, animate, group, keyframes } from '@angular/animations';
+import { Subscription } from 'rxjs/Subscription';
 
 import { DataService } from '../store/data.service';
 
 enum Type { top = 0, new, show, ask, job };
+
+const savedState = {
+  stories: [],
+  storiesType: undefined,
+  currentPage: 0,
+  scrollTop: 0
+};
 
 @Component({
   selector: 'app-item-list',
@@ -44,6 +51,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   slideState: 'slideleft' | 'slideright' | 'ready';
 
   constructor(
+    private elemRef: ElementRef,
     private route: ActivatedRoute,
     private dataService: DataService
   ) { }
@@ -63,9 +71,18 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.currentPage = -1;
-    this.slideState = 'ready';
-    this.newItems = undefined;
+    console.log('saved state:', savedState, savedState.storiesType, type);
+    if (savedState.storiesType === type) {
+      // restore state
+      console.log('restore state:', savedState);
+      this.currentPage = savedState.currentPage;
+      this.updateStories(savedState.stories);
+    } else {
+      this.currentPage = -1;
+      this.slideState = 'ready';
+      savedState.storiesType = type;
+    }
+
     if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
@@ -91,6 +108,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
     this.totalPages = Math.ceil(pages);
     this.stories = stories;
     this.switchPage(this.currentPage);
+    savedState.stories = stories;
   }
 
   handleError(error: any) {
@@ -109,12 +127,13 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
           console.log('stroies updated.');
           if (page > this.currentPage) {
             this.slideState = 'slideright';
-            this.currentPage = page;
           } else if (page < this.currentPage) {
             this.slideState = 'slideleft';
-            this.currentPage = page;
           }
+          
           this.newItems = items.filter(item => !!item);
+          this.currentPage = page;
+          savedState.currentPage = page;
         } else {
           console.error('receiving empty items');
         }

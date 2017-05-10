@@ -11,4 +11,5 @@
 
 <div *ngIf="story" class="comments">
   <p>{{ story.descendants }} comments</p>
+  <app-comment *ngFor="let kid of story.kids" [kid]="kid"></app-comment>
 </div>

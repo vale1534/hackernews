@@ -14,6 +14,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { HostNamePipe } from './pipes/host-name.pipe';
 import { StoryComponent } from './views/story.component';
 import { UserComponent } from './views/user.component';
+import { CommentComponent } from './views/comment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserComponent } from './views/user.component';
     TimeAgoPipe,
     HostNamePipe,
     StoryComponent,
-    UserComponent
+    UserComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@
   "name": "ng4-hackernews",
   "version": "0.0.0",
   "license": "MIT",
+  "description": "Ng4 hacker news client, built with Angular 4.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

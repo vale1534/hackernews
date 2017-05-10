@@ -63,16 +63,24 @@ export class DataService {
     }));
   }
 
-  getStory(id: number) {
+  getStory(id: number): Promise<any> {
+    return this.getItem(id);
+  }
+
+  getComment(id: number): Promise<any> {
+    return this.getItem(id);
+  }
+
+  getUser(id: string): Promise<any> {
+    return this.api.fetchUser(id);
+  }
+
+  getItem(id: number): Promise<any> {
     return this.api.fetchItem(id)
       .then(item => {
         lscache.set(String(id), item, 15);
         return item;
       });
-  }
-
-  getUser(id: string) {
-    return this.api.fetchUser(id);
   }
 
   getData(topic: string) {

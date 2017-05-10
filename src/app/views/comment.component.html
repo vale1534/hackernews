@@ -1,0 +1,16 @@
+<div *ngIf="comment" class="comment">
+  <span class="meta">
+    by <a (click)="viewUser()">{{ comment.by }}</a>
+    {{ comment.time | timeAgo }} ago, 
+    <a (click)="hidden = !hidden">{{hidden ? "show" : "hide"}}</a>
+  </span>
+  
+  <div [innerHTML]="comment.text" class="text" [hidden]="hidden"></div>
+
+  <div class="replies" [hidden]="hidden">
+    <span *ngIf="replies.length" class="meta">{{ pluralizeReplies }}, 
+      <a (click)="repliesHidden = !repliesHidden">{{repliesHidden ? "show" : "hide"}}</a>
+    </span>
+    <app-comment *ngFor="let kid of replies" [kid]="kid" [hidden]="repliesHidden"></app-comment>
+  </div>
+</div>

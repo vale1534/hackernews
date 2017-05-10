@@ -1,6 +1,16 @@
-# Ng4Hackernews
+# Ng4 hacker news
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
+
+HackerNews clone built with Angular 4.0, rewrite [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
+
+基于 Angular 4 的 Hacker News 客户端，界面设计取自于 Vue.js 的 Demo 项目 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 。
+
+<p align="center">
+  <a href="https://??" target="_blank">
+    <img src="??" width="700px">
+  </a>
+</p>
 
 ## Development server
 

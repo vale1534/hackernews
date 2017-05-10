@@ -1,0 +1,35 @@
+$marginleft: 1em;
+
+.comment {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.meta {
+  font-size: 0.95em;
+  color: #828282;
+  a {
+    color: #828282;
+    text-decoration: underline;
+    &:hover {
+      color: #ff6600;
+    }
+  }
+}
+
+.replies {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  margin-left: $marginleft;
+}
+
+.text {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  margin-left: $marginleft;
+  font-size: 0.95em;
+  overflow: auto;
+  p {
+    margin: 0.75em 0;
+  }
+}
