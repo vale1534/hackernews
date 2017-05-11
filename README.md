@@ -7,8 +7,9 @@ HackerNews clone built with Angular 4.0, rewrite [vue-hackernews-2.0](https://gi
 基于 Angular 4 的 Hacker News 客户端，界面设计取自于 Vue.js 的 Demo 项目 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 。
 
 <p align="center">
-  <a href="https://??" target="_blank">
-    <img src="??" width="700px">
+  <a href="https://fe-artisan.github.io/ng4-hn/" target="_blank">
+    <img src="https://github.com/fe-artisan/ng4-hn/blob/master/imgs/snapshot1.png" width="978px">
+    <img src="https://github.com/fe-artisan/ng4-hn/blob/master/imgs/snapshot2.png" width="978px">
   </a>
 </p>
 

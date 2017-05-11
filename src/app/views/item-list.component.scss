@@ -44,3 +44,16 @@
     margin: 10px 0;
   }
 }
+
+.busy-indicator {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  max-width: 800px;
+  top: 98px;
+  height: 20px;
+  @media (max-width: 600px) {
+    height: 10px;
+    top: 91px;
+  }
+}

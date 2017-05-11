@@ -49,6 +49,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   items: any[];
   newItems: any[];
   slideState: 'slideleft' | 'slideright' | 'ready';
+  isBusy: boolean = false;
 
   constructor(
     private elemRef: ElementRef,
@@ -121,8 +122,10 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
     const end = start + this.storiesPerPage;
     const stories = this.stories.slice(start, end);
 
+    this.isBusy = true;
     this.dataService.getStories(stories)
       .then(items => {
+        this.isBusy = false;
         if (items && items.length) {
           console.log('stroies updated.');
           if (page > this.currentPage) {
@@ -151,6 +154,10 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
       this.items = this.newItems;
       this.slideState = 'ready';
     }
+  }
+
+  itemsValid(): boolean {
+    return this.stories && this.stories.length > 0;
   }
 
   prevPage(): void {
