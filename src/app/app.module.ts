@@ -15,6 +15,9 @@ import { HostNamePipe } from './pipes/host-name.pipe';
 import { StoryComponent } from './views/story.component';
 import { UserComponent } from './views/user.component';
 import { CommentComponent } from './views/comment.component';
+import { AnimateCubeComponent } from './partials/animate-cube.component';
+import { AnimatePulseComponent } from './partials/animate-pulse.component';
+import { AnimateWaveComponent } from './partials/animate-wave.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { CommentComponent } from './views/comment.component';
     HostNamePipe,
     StoryComponent,
     UserComponent,
-    CommentComponent
+    CommentComponent,
+    AnimateCubeComponent,
+    AnimatePulseComponent,
+    AnimateWaveComponent
   ],
   imports: [
     BrowserModule,

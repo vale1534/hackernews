@@ -13,3 +13,5 @@
   <p>{{ story.descendants }} comments</p>
   <app-comment *ngFor="let kid of story.kids" [kid]="kid"></app-comment>
 </div>
+
+<app-animate-cube *ngIf="!story"></app-animate-cube>

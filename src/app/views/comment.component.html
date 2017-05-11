@@ -11,6 +11,10 @@
     <span *ngIf="replies.length" class="meta">{{ pluralizeReplies }}, 
       <a (click)="repliesHidden = !repliesHidden">{{repliesHidden ? "show" : "hide"}}</a>
     </span>
-    <app-comment *ngFor="let kid of replies" [kid]="kid" [hidden]="repliesHidden"></app-comment>
+    <div *ngIf="!repliesHidden">
+      <app-comment *ngFor="let kid of replies" [kid]="kid"></app-comment>
+    </div>
   </div>
 </div>
+
+<app-animate-cube *ngIf="!comment"></app-animate-cube>
