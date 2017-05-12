@@ -2,14 +2,16 @@
   <a [class.disabled]="!hasPrevPages()" (click)="prevPage()">&lt; prev</a>
   <span>{{currentPage+1}}/{{totalPages}}</span>
   <a [class.disabled]="!hasMorePages()" (click)="nextPage()">more &gt;</a>
+  <!--<span> // </span>
+  <a (click)="shuffle()">Shuffle</a>-->
 </div>
 
 <div class="busy-indicator">
   <app-animate-wave *ngIf="isBusy"></app-animate-wave>
 </div>
 
-<div class="items-list" [@slideInOut]="slideState" (@slideInOut.done)="animationDone()">
-  <app-item *ngFor="let item of items; trackBy: trackItem" [item]="item"></app-item>
+<div class="items-list" [@slideInOut]="slideState" (@slideInOut.done)="animationDone()" transition-group>
+  <app-item *ngFor="let item of items; trackBy: trackItem" [item]="item" transition-group-item></app-item>
 </div>
 
 <app-animate-cube *ngIf="!itemsValid()"></app-animate-cube>

@@ -23,9 +23,11 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/firebase": "^2.4.31",
+    "@types/lodash": "^4.14.64",
     "@types/lscache": "^1.0.29",
     "core-js": "^2.4.1",
     "firebase": "^3.9.0",
+    "lodash": "^4.17.4",
     "lscache": "^1.1.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"

@@ -34,6 +34,10 @@
   }
 }
 
+.transition-group-item-moved {
+  transition: transform 0.5s;
+}
+
 .items-list {
   //background-color: #fff;
   border-radius: 2px;

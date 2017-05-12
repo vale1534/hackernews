@@ -10,8 +10,8 @@ import { DataService } from '../store/data.service';
 export class CommentComponent implements OnInit {
   @Input() kid: number;
   comment: any;
-  hidden: boolean = false;
-  repliesHidden: boolean = true;
+  hidden = false;
+  repliesHidden = true;
 
   constructor(
     private router: Router,
@@ -28,11 +28,11 @@ export class CommentComponent implements OnInit {
   }
 
   get replies(): number[] {
-    return this.comment && this.comment.kids ? this.comment.kids : []
+    return this.comment && this.comment.kids ? this.comment.kids : [];
   }
 
   get pluralizeReplies(): string {
     const num = this.replies.length;
-    return num > 1 ? `${num} replies` : `${num} reply`
+    return num > 1 ? `${num} replies` : `${num} reply`;
   }
 }

@@ -18,6 +18,8 @@ import { CommentComponent } from './views/comment.component';
 import { AnimateCubeComponent } from './partials/animate-cube.component';
 import { AnimatePulseComponent } from './partials/animate-pulse.component';
 import { AnimateWaveComponent } from './partials/animate-wave.component';
+import { TransitionGroupItemDirective } from './partials/transition-group-item.directive';
+import { TransitionGroupComponent } from './partials/transition-group.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AnimateWaveComponent } from './partials/animate-wave.component';
     CommentComponent,
     AnimateCubeComponent,
     AnimatePulseComponent,
-    AnimateWaveComponent
+    AnimateWaveComponent,
+    TransitionGroupItemDirective,
+    TransitionGroupComponent
   ],
   imports: [
     BrowserModule,
