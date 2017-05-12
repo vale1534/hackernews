@@ -40,7 +40,7 @@ export class StoryComponent implements OnInit {
   }
 
   viewUser(): void {
-    console.log('view user info:', this.story.by);
+    // console.log('view user info:', this.story.by);
     this.router.navigate(['user', this.story.by]);
   }
 }

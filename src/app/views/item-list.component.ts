@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef } from '@angula
 import { ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { trigger, state, style, transition, animate, group, keyframes } from '@angular/animations';
 import { Subscription } from 'rxjs/Subscription';
+import { shuffle as _shuffle } from 'lodash';
 
 import { DataService } from '../store/data.service';
 
@@ -20,19 +21,19 @@ const savedState = {
   styleUrls: ['./item-list.component.scss'],
   animations: [
     trigger('slideInOut', [
-      state('ready', style({transform:'translateX(0)',opacity:1})),
-      state('slideleft', style({transform:'translateX(-10px)',opacity:0})),
-      state('slideright', style({transform:'translateX(10px)',opacity:0})),
+      state('ready', style({ transform: 'translateX(0)', opacity: 1 })),
+      state('slideleft', style({ transform: 'translateX(-10px)', opacity: 0 })),
+      state('slideright', style({ transform: 'translateX(10px)', opacity: 0 })),
       transition('* => slideleft', [
         animate('100ms cubic-bezier(.55,0,.1,1)', keyframes([
-          style({transform:'translateX(0px)',opacity:1}),
-          style({transform:'translateX(30px)',opacity:0}),
+          style({ transform: 'translateX(0px)', opacity: 1 }),
+          style({ transform: 'translateX(30px)', opacity: 0 }),
         ]))
       ]),
       transition('* => slideright', [
         animate('100ms cubic-bezier(.55,0,.1,1)', keyframes([
-          style({transform:'translateX(0px)',opacity:1}),
-          style({transform:'translateX(-30px)',opacity:0}),
+          style({ transform: 'translateX(0px)', opacity: 1 }),
+          style({ transform: 'translateX(-30px)', opacity: 0 }),
         ]))
       ]),
       transition('* => ready', animate('50ms ease-in'))
@@ -49,7 +50,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   items: any[];
   newItems: any[];
   slideState: 'slideleft' | 'slideright' | 'ready';
-  isBusy: boolean = false;
+  isBusy = false;
 
   constructor(
     private elemRef: ElementRef,
@@ -64,18 +65,18 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
     );
   }
 
-  routeParamsChanged(param: {[key: string]: string}): void {
-    console.log(`route param changed: ${param.stories}`);
+  routeParamsChanged(param: { [key: string]: string }): void {
+    // console.log(`route param changed: ${param.stories}`);
     const type = Type[param.stories] as number;
     if (typeof type === 'undefined') {
       // TODO: Handling undefined type
       return;
     }
 
-    console.log('saved state:', savedState, savedState.storiesType, type);
+    // console.log('saved state:', savedState, savedState.storiesType, type);
     if (savedState.storiesType === type) {
       // restore state
-      console.log('restore state:', savedState);
+      // console.log('restore state:', savedState);
       this.currentPage = savedState.currentPage;
       this.updateStories(savedState.stories);
     } else {
@@ -87,7 +88,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
     if (this.subscription && !this.subscription.closed) {
       this.subscription.unsubscribe();
     }
-    
+
     const subject = this.dataService.getStoriesSubject(type);
     this.subscription = subject.subscribe(
       stories => this.updateStories(stories),
@@ -117,6 +118,7 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   }
 
   switchPage(page: number) {
+    // tslint:disable-next-line:curly
     if (page < 0) page = 0;
     const start = page * this.storiesPerPage;
     const end = start + this.storiesPerPage;
@@ -127,16 +129,18 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
       .then(items => {
         this.isBusy = false;
         if (items && items.length) {
-          console.log('stroies updated.');
-          if (page > this.currentPage) {
-            this.slideState = 'slideright';
-          } else if (page < this.currentPage) {
-            this.slideState = 'slideleft';
-          }
-          
+          // console.log('stroies updated.', this.slideState);
           this.newItems = items.filter(item => !!item);
-          this.currentPage = page;
-          savedState.currentPage = page;
+
+          if (page === this.currentPage) {
+            // console.log(this.items.map(it => it.id));
+            // console.log(this.newItems.map(it => it.id));
+            this.items = this.newItems;
+          } else {
+            this.slideState = page > this.currentPage ? 'slideright' : 'slideleft';
+            this.currentPage = page;
+            savedState.currentPage = page;
+          }
         } else {
           console.error('receiving empty items');
         }
@@ -149,11 +153,19 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   }
 
   _animationDone(): void {
-    console.log('slideState', this.slideState);
+    // console.log('slideState', this.slideState);
     if (this.slideState !== 'ready') {
       this.items = this.newItems;
       this.slideState = 'ready';
+      document.body.scrollTop = 0;
     }
+  }
+
+  shuffle(): void {
+    const storis = [...this.stories];
+    storis[8] = this.stories[9];
+    storis[9] = this.stories[8];
+    this.updateStories(storis);
   }
 
   itemsValid(): boolean {
@@ -161,10 +173,12 @@ export class ItemListComponent implements AfterViewInit, OnDestroy {
   }
 
   prevPage(): void {
+    // tslint:disable-next-line:no-unused-expression
     this.hasPrevPages() && this.switchPage(this.currentPage - 1);
   }
 
   nextPage(): void {
+    // tslint:disable-next-line:no-unused-expression
     this.hasMorePages() && this.switchPage(this.currentPage + 1);
   }
 

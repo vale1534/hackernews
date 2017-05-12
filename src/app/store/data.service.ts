@@ -78,7 +78,7 @@ export class DataService {
   getItem(id: number): Promise<any> {
     return this.api.fetchItem(id)
       .then(item => {
-        lscache.set(String(id), item, 15);
+        lscache.set(String(id), item, 5);
         return item;
       });
   }

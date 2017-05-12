@@ -21,12 +21,12 @@ export class ItemComponent implements OnInit {
   }
 
   viewStory(): void {
-    console.log('view story:', this.item.id);
+    // console.log('view story:', this.item.id);
     this.router.navigate(['story', this.item.id]);
   }
 
   viewUser(): void {
-    console.log('view user info:', this.item.by);
+    // console.log('view user info:', this.item.by);
     this.router.navigate(['user', this.item.by]);
   }
 }

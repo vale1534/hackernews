@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 HackerNews clone built with Angular 4.0, rewrite [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0).
 
-基于 Angular 4 的 Hacker News 客户端，界面设计取自于 Vue.js 的 Demo 项目 [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0) 。
+Switch to gh-pages branch for deployment onto the github pages.
 
 <p align="center">
   <a href="https://fe-artisan.github.io/ng4-hn/" target="_blank">
